@@ -181,9 +181,11 @@ const StyledRoot = styled.div<{
 
 export const StoryWrapper = styled.div`
   position: relative;
-  display: flex;
+  /*display: flex;*/
   flex-direction: column;
+  width: 500px;
 
+  
   @media only screen and ${(props) => props.theme.breakpoints.s} {
     .ko-menu {
       position: fixed;
@@ -331,6 +333,7 @@ function Root({
         '--ko-width': dimensions.width + 'px',
         '--ko-offset-x': offset.x + 'px',
         '--ko-offset-y': offset.y + 'px',
+        'display': 'flex',
         ...style,
       }}
       layout={layout}
@@ -365,6 +368,9 @@ function PlayerRenderer({ menu }: PlayerRendererProps) {
         <Subjects.Header></Subjects.Header>
         <Subjects.Content></Subjects.Content>
       </Subjects.Root>
+      <div className='ko-preview'>
+        <iframe  src="https://play.chatium.com/s/preview/?url=start%2F1-screen"/>
+      </div>
     </>
   );
 }

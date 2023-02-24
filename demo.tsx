@@ -1,18 +1,59 @@
 import './demo.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import demoJSON from './docs/tutorial.json';
+//import demoJSON from './docs/tutorial.json';
 import { KodemoMenu, Dropdown } from '@kodemo/util';
 import { KodemoPlayer, Pagination } from './src/KodemoPlayer';
 import { KodemoDocument } from './src/KodemoPlayer';
+import axios from 'axios'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: ":slug",
+    element: <DocPage></DocPage>,
+    loader: docLoader,
+  },
+  {
+    path: '/',
+    element: <DocPage></DocPage>,
+    loader: docLoader,
+  }
+]);
+
+
+
+export async function docLoader({params} : { params : any }) {
+  let result = await axios.get(`https://docs.chatium.com/data?slug=` + params.slug)
+
+  const doc = result.data //{ name: "Timur", id: params.slug};
+  return { doc };
+}
+
+export function DocPage() {
+  const { doc } = useLoaderData();
+  
+  return (
+    <KodemoPlayer
+      json={doc.playerData}
+      menu={<Menu />}
+    ></KodemoPlayer>
+  )
+}
+
 
 // @ts-ignore
 (window.rr = window.rr || ReactDOM.createRoot(document.getElementById('root')!)).render(
   <React.StrictMode>
-    <Demo></Demo>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
+/*
 export default function Demo() {
   const [json, setJSON] = React.useState<KodemoDocument | undefined>(demoJSON);
 
@@ -52,6 +93,7 @@ export default function Demo() {
     ></KodemoPlayer>
   );
 }
+*/
 
 function Menu() {
   return (
