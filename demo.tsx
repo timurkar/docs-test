@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 //import demoJSON from './docs/tutorial.json';
 import { KodemoMenu, Dropdown } from '@kodemo/util';
-import { KodemoPlayer, Pagination } from './src/KodemoPlayer';
+import { KodemoPlayer, Pagination, KodemoLayout } from './src/KodemoPlayer';
 import { KodemoDocument } from './src/KodemoPlayer';
 import axios from 'axios'
 import {
@@ -41,6 +41,8 @@ export function DocPage() {
     <KodemoPlayer
       json={doc.playerData}
       menu={<Menu />}
+      previewUrl={doc.previewUrl}
+      layout={KodemoLayout.auto}
     ></KodemoPlayer>
   )
 }

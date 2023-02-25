@@ -350,27 +350,30 @@ export interface PlayerRendererProps {
    * to the story.
    */
   menu?: ReactNode;
+  previewUrl?: string,
 }
 
-function PlayerRenderer({ menu }: PlayerRendererProps) {
+function PlayerRenderer({ previewUrl, menu }: PlayerRendererProps) {
   return (
     <>
-      <StoryWrapper>
-        <>
-          {menu}
-          <Story.Root>
-            <Story.Content></Story.Content>
-            <Timeline.Root></Timeline.Root>
-          </Story.Root>
-        </>
-      </StoryWrapper>
+      <div style={{flex: 1, justifyContent: 'flex-end', display: 'flex'}}>
+        <StoryWrapper>
+          <>
+            {menu}
+            <Story.Root>
+              <Story.Content></Story.Content>
+              <Timeline.Root></Timeline.Root>
+            </Story.Root>
+          </>
+        </StoryWrapper>
+      </div>
       <Subjects.Root>
         <Subjects.Header></Subjects.Header>
         <Subjects.Content></Subjects.Content>
       </Subjects.Root>
-      <div className='ko-preview'>
-        <iframe  src="https://play.chatium.com/s/preview/?url=start%2F1-screen"/>
-      </div>
+      { previewUrl && <div className='ko-preview'>
+        <iframe src="preview-mode" src={previewUrl}/>
+      </div> }
     </>
   );
 }
