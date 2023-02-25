@@ -356,7 +356,7 @@ export interface PlayerRendererProps {
 function PlayerRenderer({ previewUrl, menu }: PlayerRendererProps) {
   return (
     <>
-      <div style={{flex: 1, justifyContent: 'flex-end', display: 'flex'}}>
+      <div style={{flex: 1, justifyContent: 'flex-end', display: 'flex', maxWidth: '100%'}}>
         <StoryWrapper>
           <>
             {menu}

@@ -100,7 +100,8 @@ export default function Demo() {
 function Menu() {
   return (
     <KodemoMenu.Root getDocumentJSON={() => {}} setDocumentJSON={() => {}} onKeyboardSaveShortcut={() => {}}>
-      <KodemoMenu.Dropdown>
+      
+      <KodemoMenu.Dropdown >
         <Dropdown.Item onSelect={() => {}}>Example</Dropdown.Item>
       </KodemoMenu.Dropdown>
 

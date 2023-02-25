@@ -69,3 +69,31 @@ a {
     display: none;
   }
 }
+
+.ko-menu-trigger::before {
+  content: 'Tutorials';
+}
+.ko-menu-trigger > div  {
+  display: none;
+}
+@media (min-width: 1200px) {
+  .ko-menu .ko-menu-trigger {
+    margin-left: -10px;
+  }  
+}
+
+.ͼv {
+  color: #569cd6;
+}
+.ͼr {
+  color: #9cdcfe;
+}
+.ͼ14 {
+  color: #ce9178;
+}
+.ͼs {
+  color: #9cdcfe;
+}
+.ͼr {
+  color: #dcdcaa;
+}
