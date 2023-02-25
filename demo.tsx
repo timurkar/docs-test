@@ -28,7 +28,7 @@ const router = createBrowserRouter([
 
 
 export async function docLoader({params} : { params : any }) {
-  let result = await axios.get(`https://docs.chatium.com/data?slug=` + params.slug)
+  let result = await axios.get(`https://docs.chatium.com/tutorial/api?slug=` + params.slug)
 
   const doc = result.data //{ name: "Timur", id: params.slug};
   return { doc };
