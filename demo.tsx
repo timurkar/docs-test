@@ -8,9 +8,12 @@ import { KodemoDocument } from './src/KodemoPlayer';
 import axios from 'axios'
 import {
   createBrowserRouter,
+  NavLink,
+  useNavigate,
   RouterProvider,
 } from "react-router-dom";
 import { Form, useLoaderData } from "react-router-dom";
+import { PlayIcon } from '@radix-ui/react-icons';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +43,7 @@ export function DocPage() {
   return (
     <KodemoPlayer
       json={doc.playerData}
-      menu={<Menu />}
+      menu={<Menu playgroundUrl={doc.playgroundUrl} items={doc.tutorials}/>}
       previewUrl={doc.previewUrl}
       layout={KodemoLayout.auto}
     ></KodemoPlayer>
@@ -97,18 +100,34 @@ export default function Demo() {
 }
 */
 
-function Menu() {
+interface TutorialItem {
+  title: string
+  url: string
+}
+
+function Menu({playgroundUrl, items} : {playgroundUrl?:string, items?: TutorialItem[] }) {
+  const navigate = useNavigate()
   return (
     <KodemoMenu.Root getDocumentJSON={() => {}} setDocumentJSON={() => {}} onKeyboardSaveShortcut={() => {}}>
       
       <KodemoMenu.Dropdown >
-        <Dropdown.Item onSelect={() => {}}>Example</Dropdown.Item>
+        {items?.map( item => 
+          <Dropdown.Item onSelect={() => navigate(item.url)}>
+            {item.title}
+          </Dropdown.Item>
+        )}
       </KodemoMenu.Dropdown>
 
-      <KodemoMenu.Title editable={false} defaultTitle="Test" />
+      {/*<KodemoMenu.Title editable={false} defaultTitle="Open code in playground"></KodemoMenu.Title>*/}
+      
       <KodemoMenu.RightSlot>
         <Pagination />
       </KodemoMenu.RightSlot>
+
+      {playgroundUrl && <div className='ko-playground-link'>
+        <PlayIcon/>
+        <a style={{paddingLeft: '5px'}} href={playgroundUrl} target="playground">Open in playground</a>
+      </div> }
     </KodemoMenu.Root>
   );
 }
